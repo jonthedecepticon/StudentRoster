@@ -11,44 +11,46 @@
 
 #include <stdio.h>
 #include "degree.h"
-using namespace std;
 
 class Student {
-    public:
-        const static int daysInCourseArraySize = 3;
-        // Get
-        string getId();
-        string getFirstName();
-        string getLastName();
-        string getEmailAddress();
-        int getAge();
-        int* getNumberOfDaysToComplete();
-        DegreeProgram getDegreeProgram();
-        // Set
-        void setId(string studentId);
-        void setFirstName(string firstName);
-        void setLastName(string lastName);
-        void setEmailAddress(string email);
-        void setAge(int age);
-        void setNumberOfDaysToComplete(int days[]);
-        void setDegreeProgram(DegreeProgram degree);
-        void print();
+    const static int daysInCourseArraySize = 3;
+    std::string studentId;
+    std::string firstName;
+    std::string lastName;
+    std::string emailAddress;
+    int age;
+    std::size_t* numberOfDaysToComplete;
+    DegreeProgram degreeProgram;
     
+    public:
         // Contstructor
         Student();
-        Student(string studentID, string first, string last, string email, int years, int numOfDays[], DegreeProgram degree);
+        Student(const std::string& id, const std::string& first, const std::string& last, const std::string& email, const u_int8_t years, const std::size_t* numOfDays, const DegreeProgram& degree);
     
         // Decontstructor
         ~Student();
     
-    private:
-         string studentId;
-         string firstName;
-         string lastName;
-         string emailAddress;
-         int age;
-         int numberOfDaysToComplete[daysInCourseArraySize];
-         DegreeProgram degreeProgram;
+        //size_t
+    
+        // Get
+        std::string getId();
+        std::string getFirstName();
+        std::string getLastName();
+        std::string getEmailAddress();
+        int getAge();
+        const std::size_t* getNumberOfDaysToComplete();
+        DegreeProgram getDegreeProgram();
+        // Set
+        void setId(std::string studentId);
+        void setFirstName(std::string firstName);
+        void setLastName(std::string lastName);
+        void setEmailAddress(std::string email);
+        void setAge(int age);
+        void setNumberOfDaysToComplete(int days[3]);
+        void setDegreeProgram(const DegreeProgram& degree);
+        void print();
+    
+
 };
 
 #endif /* student_h */

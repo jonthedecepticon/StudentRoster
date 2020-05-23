@@ -38,8 +38,10 @@ int main() {
 
     for (int i = 0; i < sizeof(studentData)/sizeof(studentData[0]); ++i) {
         classRoster->parse(studentData[i]);
-        cout << endl;
     };
     
+//    classRoster->printAll();
+    classRoster->printByDegreeProgram(SOFTWARE);
+
 //    classRoster.add(currentStudentID, currentFirstName, currentLastName, currentEmailAddress, currentAge, currentDaysInCourse[0], currentDaysInCourse[1], currentDaysInCourse[2], i, currentDegreeProgram);
 }

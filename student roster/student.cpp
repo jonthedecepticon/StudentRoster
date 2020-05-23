@@ -17,16 +17,20 @@ Student::Student() {
     this->lastName = "";
     this->emailAddress = "";
     this->age = 0;
-    for (int i = 0; i < daysInCourseArraySize; ++i) this->numberOfDaysToComplete[i] = 0;
+    numberOfDaysToComplete = new size_t[daysInCourseArraySize]{};
+    this->degreeProgram = DegreeProgram::SECURITY;
 }
 
-Student::Student(string id, string first, string last, string email, int years, int numOfDays[], DegreeProgram degree) {
+Student::Student(const string& id, const string& first, const string& last, const string& email, u_int8_t years, const size_t* numOfDays, const DegreeProgram& degreeProgram) {
     studentId = id;
     firstName = first;
     lastName = last;
     emailAddress = email;
     age = years;
-    for (int i = 0; i < daysInCourseArraySize; ++i) this->numberOfDaysToComplete[i] = numberOfDaysToComplete[i];
+    numberOfDaysToComplete = new size_t[daysInCourseArraySize]{};
+    memcpy(numberOfDaysToComplete, numOfDays, daysInCourseArraySize);
+    
+    this->degreeProgram = degreeProgram;
 }
 // Get
 string Student::getId() {
@@ -49,7 +53,7 @@ int Student::getAge() {
     return age;
 }
 
-int* Student::getNumberOfDaysToComplete() {
+const size_t* Student::getNumberOfDaysToComplete() {
     return numberOfDaysToComplete;
 }
 
@@ -85,7 +89,7 @@ void Student::setNumberOfDaysToComplete(int days[]) {
     }
 }
 
-void Student::setDegreeProgram(DegreeProgram degreeProgram)
+void Student::setDegreeProgram(const DegreeProgram& degreeProgram)
 {
     this->degreeProgram = degreeProgram;
 }
@@ -97,15 +101,15 @@ void Student::print() {
     cout << "Email Address: " << emailAddress  << endl;
     cout << "Age: "  << age << endl;
     cout << "DaysInCourse: {";
-    for (int i = 0; i < 3; i++ ) {
-        if (i < 2 ) {
-            cout << numberOfDaysToComplete[i] << ", ";
-        } else {
-            cout << numberOfDaysToComplete[i];
-        }
+    
+    for (auto curr = numberOfDaysToComplete; curr < numberOfDaysToComplete + daysInCourseArraySize; ++curr) {
+        cout << *curr << endl;
     }
-    cout << "}"  << endl;
-    cout << "Degree Program: " << degreeProgram << endl;
+    
+    cout << "}" << '\t' << endl;
+    cout << "Degree Prog88sram: " << degreeProgram << endl;
+    cout << "Degree Program: " << degreeProgramStrings[degreeProgram] << endl;
+    cout << "------------------------------------------" << endl;
 }
 
 Student::~Student() {}

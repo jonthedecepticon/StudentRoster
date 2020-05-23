@@ -8,32 +8,27 @@
 
 #ifndef roster_h
 #define roster_h
-#include "student.h"
 #include <stdio.h>
-using namespace std;
+#include "student.h"
 
 class Roster {
-    public:
-        int index;
-        int size;
+        size_t size;
         //int classRosterArraySize = 5;
         Student *classRosterArray;
-    
-        void add(string studentID, string firstName, string lastName, string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, DegreeProgram degreeprogram);
-        void remove(string studentID);
-        void printAll();
-        void printAverageDaysInCourse(string studentID);
-        void printInvalidEmails();
-        void printByDegreeProgram(DegreeProgram degreeProgram);
-    
-        void parse(string row);
-    
-        // Constructor
+    public:
         Roster();
-        Roster(int size);
-        //Roster(int numberOfStudents);
-        // Deconstructor
+        Roster(const std::size_t size);
+
         ~Roster();
+        void add(const std::string& studentID, const std::string& firstName, const std::string& lastName, const std::string& emailAddress,  std::size_t age, const std::size_t daysInCourse1, const std::size_t daysInCourse2, const std::size_t daysInCourse3, const DegreeProgram& degreeprogram);
+        void remove(const std::string& studentID);
+        void printAll();
+        void printAverageDaysInCourse(const std::string& studentID);
+        void printInvalidEmails();
+        void printByDegreeProgram(const DegreeProgram& degreeProgram);
+    
+        void parse(const std::string& row);
+
 };
 
 #endif /* roster_h */

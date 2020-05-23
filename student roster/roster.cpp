@@ -14,27 +14,25 @@
 
 using namespace std;
 
+bool *classRosterArrayIsDeleted;
+
 Roster::Roster() {
     this->size = 0;
-    this->index = -1;
-    this->classRosterArray = new Student[5];
+    this->classRosterArray = new Student[5]{};
+    classRosterArrayIsDeleted = new bool[5]{};
 }
 
-Roster::Roster(int size) {
+Roster::Roster(size_t size) {
     this->size = size;
-    this->index = -1;
-    this->classRosterArray = new Student[size];
+    this->classRosterArray = new Student[size]{};
+    
 }
 
 Roster::~Roster() {
-//    for (int i = 0; i <= classRosterArray.size(); i++)
-//    {
-//        delete this->classRosterArray[i];
-//    }
-//    delete classRosterArray;
+    delete [] classRosterArray;
 }
 
-void Roster::parse(string row){
+void Roster::parse(const string& row){
     Student student;
     vector<string> v{};
     
@@ -50,10 +48,10 @@ void Roster::parse(string row){
     string firstName;
     string lastName;
     string email;
-    int age = 0;
-    int daysInCourse1 = 0;
-    int daysInCourse2 = 0;
-    int daysInCourse3 = 0;
+    size_t age = 0;
+    size_t daysInCourse1 = 0;
+    size_t daysInCourse2 = 0;
+    size_t daysInCourse3 = 0;
     DegreeProgram degree = DegreeProgram::SOFTWARE;
     
     for (size_t i = 0; i < v.size(); i++) {
@@ -71,46 +69,68 @@ void Roster::parse(string row){
                 email = v[i];
               break;
            case 4 :
-                age = stoi(v[i]);
+                age = stoul(v[i]);
               break;
           case 5 :
-                daysInCourse1 = stoi(v[i]);
+                daysInCourse1 = stoul(v[i]);
                break;
           case 6 :
-                daysInCourse2 = stoi(v[i]);
+                daysInCourse2 = stoul(v[i]);
              break;
           case 7 :
-                daysInCourse3 = stoi(v[i]);
+                daysInCourse3 = stoul(v[i]);
              break;
           case 8 :
+                // todo:: set degree here
                 degree = DegreeProgram::SOFTWARE;
              break;
            default :
                 cout << "Error: too many items" << endl;
         }
     }
-   Student student = Student(studentID, firstName, lastName, emailAddress, age, courseDays, degreeProgram);
-//    add(studentID, firstName, lastName, email, age, daysInCourse1, daysInCourse2, daysInCourse3, degree);
+    
+    // Seperate logic - return a Student obj; that would be used in the ::add
+    // Student student = Student(studentID, firstName, lastName, emailAddress, age, courseDays, degreeProgram);
+    
+    add(studentID, firstName, lastName, email, age, daysInCourse1, daysInCourse2, daysInCourse3, degree);
 }
 
-void Roster::add(string studentID, string firstName, string lastName, string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, DegreeProgram degreeProgram) {
-    int courseDays[3] = { daysInCourse1, daysInCourse2, daysInCourse3 };
+void Roster::add(const string& studentID, const  string& firstName, const  string& lastName, const  string& emailAddress, size_t age, const size_t daysInCourse1, const size_t daysInCourse2, const size_t daysInCourse3, const DegreeProgram& degreeProgram) {
+    
+    size_t courseDays[3] = { daysInCourse1, daysInCourse2, daysInCourse3 };
+
     Student student = Student(studentID, firstName, lastName, emailAddress, age, courseDays, degreeProgram);
-
-    *(classRosterArray + index) = student;
+    
+    memcpy(classRosterArray + size++, &student, sizeof(Student));
 }
 
-void Roster::remove(string studentID) {
+void Roster::remove(const string& studentID) {
+    auto curr = classRosterArray;
+    auto lastIdx = classRosterArray + size;
+    for (; curr <= lastIdx; ++curr) {
+        if (curr->getId() != studentID || classRosterArrayIsDeleted[curr - classRosterArray])
+            continue;
+        
+        classRosterArrayIsDeleted[curr - classRosterArray] = true;
+        break;
+    }
+    if (curr == lastIdx)
+        cout << "Error: Student Id not found";
 }
 
 void Roster::printAll() {
-    for (int i = 0; i <= 5; ++i)
-    {
-//        classRosterArray[i]->print();
+    
+    for (auto curr = classRosterArray; curr < classRosterArray + size; ++curr) {
+        curr->print();
     }
+    
+   // for (int i = 0; i <= 5; ++i)
+    //{
+//        classRosterArray[i]->print();
+    //}
 }
 
-void Roster::printAverageDaysInCourse(string studentID) {
+void Roster::printAverageDaysInCourse(const string& studentID) {
 //    int average = 0;
 //
 //    for (int i = 0; i < 5; ++i) {
@@ -124,6 +144,13 @@ void Roster::printInvalidEmails(){
     
 }
 
-void Roster::printByDegreeProgram(DegreeProgram degreeProgram){
+void Roster::printByDegreeProgram(const DegreeProgram& degreeProgram){
+    cout << "Printing students with degree type: " << degreeProgramStrings[degreeProgram] << endl;
     
+    for (auto curr = classRosterArray; curr < classRosterArray + size; ++curr) {
+        if(curr->getDegreeProgram() != degreeProgram)
+            continue;
+        
+        curr->print();
+    }
 }
