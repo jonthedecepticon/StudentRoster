@@ -32,7 +32,7 @@ Roster::~Roster() {
 }
 
 void Roster::parse(const string& row){
-    Student *student;
+    //Student *student;
     vector<string> v{};
     
     stringstream ss(row);
@@ -90,17 +90,21 @@ void Roster::parse(const string& row){
     // Seperate logic - return a Student obj; that would be used in the ::add
     // Student student = Student(studentID, firstName, lastName, emailAddress, age, courseDays, degreeProgram);
     
-    
-    
     add(studentID, firstName, lastName, email, age, daysInCourse1, daysInCourse2, daysInCourse3, degree);
 }
 
 void Roster::add(const string& studentID, const  string& firstName, const  string& lastName, const  string& emailAddress, size_t age, const size_t daysInCourse1, const size_t daysInCourse2, const size_t daysInCourse3, const DegreeProgram& degreeProgram) {
     
-    // size_t courseDays[3] = { daysInCourse1, daysInCourse2, daysInCourse3 };
+    //size_t* asdf[2] = { daysInCourse1, daysInCourse2, daysInCourse3 };
+    
+    
+    size_t courseDays[] = { daysInCourse1, daysInCourse2, daysInCourse3 };
+    
+    for (auto curr = classRosterArray; curr < classRosterArray + size; ++curr) {
+        cout << "asdf" << curr << endl;
+    }
 
     Student student = Student(studentID, firstName, lastName, emailAddress, age, courseDays, degreeProgram);
-    
     
     memcpy(classRosterArray + size++, &student, sizeof(Student));
 }

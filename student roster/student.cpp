@@ -63,27 +63,27 @@ DegreeProgram Student::getDegreeProgram()
 }
 
 // Set
-void Student::setId(string id) {
+void Student::setId(const string& id) {
     studentId = id;
 }
 
-void Student::setFirstName(string first) {
+void Student::setFirstName(const string& first) {
     firstName = first;
 }
 
-void Student::setLastName(string last) {
+void Student::setLastName(const string& last) {
     lastName = last;
 }
 
-void Student::setEmailAddress(string email) {
+void Student::setEmailAddress(const string& email) {
     emailAddress = email;
 }
 
-void Student::setAge(int age) {
+void Student::setAge(const int age) {
      this->age = age;
 }
 
-void Student::setNumberOfDaysToComplete(int days[]) {
+void Student::setNumberOfDaysToComplete(const int days[]) {
     for (int i = 0; i < daysInCourseArraySize; ++i) {
         numberOfDaysToComplete[i] = days[i];
     }

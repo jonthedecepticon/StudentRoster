@@ -41,12 +41,12 @@ class Student {
         const std::size_t* getNumberOfDaysToComplete();
         DegreeProgram getDegreeProgram();
         // Set
-        void setId(std::string studentId);
-        void setFirstName(std::string firstName);
-        void setLastName(std::string lastName);
-        void setEmailAddress(std::string email);
-        void setAge(int age);
-        void setNumberOfDaysToComplete(int days[3]);
+        void setId(const std::string& studentId);
+        void setFirstName(const std::string& firstName);
+        void setLastName(const std::string& lastName);
+        void setEmailAddress(const std::string& email);
+        void setAge(const int age);
+        void setNumberOfDaysToComplete(const int days[2]);
         void setDegreeProgram(const DegreeProgram& degree);
         void print();
     
