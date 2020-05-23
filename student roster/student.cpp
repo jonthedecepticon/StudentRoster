@@ -89,27 +89,27 @@ void Student::setNumberOfDaysToComplete(int days[]) {
     }
 }
 
-void Student::setDegreeProgram(const DegreeProgram& degreeProgram)
-{
+void Student::setDegreeProgram(const DegreeProgram& degreeProgram) {
     this->degreeProgram = degreeProgram;
 }
 
 void Student::print() {
-    cout << "Student ID: " << studentId << endl;;
-    cout << "First Name: " << firstName << endl;;
-    cout << "Last Name: " << lastName  << endl;
-    cout << "Email Address: " << emailAddress  << endl;
-    cout << "Age: "  << age << endl;
-    cout << "DaysInCourse: {";
+    cout << "Student ID:\t" << studentId;
+    cout << " First Name:\t" << firstName << endl;
+    cout << " Last Name:\t" << lastName  << endl;
+    cout << " Email Address:\t" << emailAddress  << endl;
+    cout << " Age:\t"  << age << endl;
+    cout << " DaysInCourse: {";
     
-    for (auto curr = numberOfDaysToComplete; curr < numberOfDaysToComplete + daysInCourseArraySize; ++curr) {
-        cout << *curr << endl;
+
+    
+    for (auto curr = numberOfDaysToComplete; curr < numberOfDaysToComplete + daysInCourseArraySize; curr++) {
+        cout << *curr << ",";
     }
     
-    cout << "}" << '\t' << endl;
-    cout << "Degree Prog88sram: " << degreeProgram << endl;
-    cout << "Degree Program: " << degreeProgramStrings[degreeProgram] << endl;
-    cout << "------------------------------------------" << endl;
+    cout << "}" << "\t";
+    cout << " Degree Program: " << degreeProgramStrings[degreeProgram] << endl;
+    cout << endl;
 }
 
 Student::~Student() {}

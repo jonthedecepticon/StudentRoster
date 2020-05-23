@@ -16,7 +16,7 @@ using namespace std;
 
 int main() {
     cout << endl << endl;
-    cout << "Course Title:\tScripting and Programming - Applications - C867";
+    cout << "Course Title:\t\t\t\tScripting and Programming - Applications - C867";
     cout << endl;
     cout << "Programming language used:\tC++";
     cout << endl;
@@ -35,13 +35,20 @@ int main() {
         "A5,Jonathan,Lambson,jlambs1@wgu.edu,33,50,40,22,SOFTWARE"
     };
     
-
     for (int i = 0; i < sizeof(studentData)/sizeof(studentData[0]); ++i) {
         classRoster->parse(studentData[i]);
-    };
+    }
     
-//    classRoster->printAll();
+//    classRoster.printAll();
+    //classRoster.printInvalidEmails();
+     
+    //loop through classRosterArray and for each element:
+    //classRoster.printAverageDaysInCourse(/*current_object's student id*/);
+     
     classRoster->printByDegreeProgram(SOFTWARE);
+//    classRoster.remove("A3");
+    classRoster->printAll();
+//    classRoster.remove("A3");
+    //expected: the above line should print a message saying such a student with this ID was not found.
 
-//    classRoster.add(currentStudentID, currentFirstName, currentLastName, currentEmailAddress, currentAge, currentDaysInCourse[0], currentDaysInCourse[1], currentDaysInCourse[2], i, currentDegreeProgram);
 }

@@ -25,7 +25,6 @@ Roster::Roster() {
 Roster::Roster(size_t size) {
     this->size = size;
     this->classRosterArray = new Student[size]{};
-    
 }
 
 Roster::~Roster() {
@@ -33,7 +32,7 @@ Roster::~Roster() {
 }
 
 void Roster::parse(const string& row){
-    Student student;
+    Student *student;
     vector<string> v{};
     
     stringstream ss(row);
@@ -52,7 +51,7 @@ void Roster::parse(const string& row){
     size_t daysInCourse1 = 0;
     size_t daysInCourse2 = 0;
     size_t daysInCourse3 = 0;
-    DegreeProgram degree = DegreeProgram::SOFTWARE;
+    DegreeProgram degree;
     
     for (size_t i = 0; i < v.size(); i++) {
         switch(i) {
@@ -81,8 +80,7 @@ void Roster::parse(const string& row){
                 daysInCourse3 = stoul(v[i]);
              break;
           case 8 :
-                // todo:: set degree here
-                degree = DegreeProgram::SOFTWARE;
+                degree = DegreeProgram::NETWORK;
              break;
            default :
                 cout << "Error: too many items" << endl;
@@ -92,14 +90,17 @@ void Roster::parse(const string& row){
     // Seperate logic - return a Student obj; that would be used in the ::add
     // Student student = Student(studentID, firstName, lastName, emailAddress, age, courseDays, degreeProgram);
     
+    
+    
     add(studentID, firstName, lastName, email, age, daysInCourse1, daysInCourse2, daysInCourse3, degree);
 }
 
 void Roster::add(const string& studentID, const  string& firstName, const  string& lastName, const  string& emailAddress, size_t age, const size_t daysInCourse1, const size_t daysInCourse2, const size_t daysInCourse3, const DegreeProgram& degreeProgram) {
     
-    size_t courseDays[3] = { daysInCourse1, daysInCourse2, daysInCourse3 };
+    // size_t courseDays[3] = { daysInCourse1, daysInCourse2, daysInCourse3 };
 
     Student student = Student(studentID, firstName, lastName, emailAddress, age, courseDays, degreeProgram);
+    
     
     memcpy(classRosterArray + size++, &student, sizeof(Student));
 }
@@ -119,15 +120,9 @@ void Roster::remove(const string& studentID) {
 }
 
 void Roster::printAll() {
-    
     for (auto curr = classRosterArray; curr < classRosterArray + size; ++curr) {
         curr->print();
     }
-    
-   // for (int i = 0; i <= 5; ++i)
-    //{
-//        classRosterArray[i]->print();
-    //}
 }
 
 void Roster::printAverageDaysInCourse(const string& studentID) {
