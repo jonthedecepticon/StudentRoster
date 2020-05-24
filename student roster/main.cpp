@@ -39,15 +39,20 @@ int main() {
         classRoster->parse(studentData[i]);
     }
     
-//    classRoster.printAll();
+    //classRoster->printAll();
     //classRoster.printInvalidEmails();
      
     //loop through classRosterArray and for each element:
-    //classRoster.printAverageDaysInCourse(/*current_object's student id*/);
+//    int cheapTrick = 1;
+//    for (int i = 0; i < sizeof(studentData)/sizeof(studentData[0]); ++i) {
+//        classRoster->printAverageDaysInCourse("A" + std::to_string(cheapTrick));
+//        cheapTrick++;
+//    }
+    
      
-    classRoster->printByDegreeProgram(SOFTWARE);
+    //classRoster->printByDegreeProgram(SOFTWARE);
 //    classRoster.remove("A3");
-    classRoster->printAll();
+    //classRoster->printAll();
 //    classRoster.remove("A3");
     //expected: the above line should print a message saying such a student with this ID was not found.
 

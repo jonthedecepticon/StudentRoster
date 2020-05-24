@@ -28,8 +28,7 @@ Student::Student(const string& id, const string& first, const string& last, cons
     emailAddress = email;
     age = years;
     numberOfDaysToComplete = new size_t[daysInCourseArraySize]{};
-    memcpy(numberOfDaysToComplete, numOfDays, daysInCourseArraySize);
-    
+    memcpy(numberOfDaysToComplete, numOfDays, daysInCourseArraySize * sizeof(size_t));
     this->degreeProgram = degreeProgram;
 }
 // Get
@@ -79,11 +78,11 @@ void Student::setEmailAddress(const string& email) {
     emailAddress = email;
 }
 
-void Student::setAge(const int age) {
+void Student::setAge(const size_t age) {
      this->age = age;
 }
 
-void Student::setNumberOfDaysToComplete(const int days[]) {
+void Student::setNumberOfDaysToComplete(const size_t days[]) {
     for (int i = 0; i < daysInCourseArraySize; ++i) {
         numberOfDaysToComplete[i] = days[i];
     }
@@ -95,14 +94,12 @@ void Student::setDegreeProgram(const DegreeProgram& degreeProgram) {
 
 void Student::print() {
     cout << "Student ID:\t" << studentId;
-    cout << " First Name:\t" << firstName << endl;
-    cout << " Last Name:\t" << lastName  << endl;
-    cout << " Email Address:\t" << emailAddress  << endl;
-    cout << " Age:\t"  << age << endl;
+    cout << " First Name:\t" << firstName;
+    cout << " Last Name:\t" << lastName;
+    cout << " Email Address:\t" << emailAddress;
+    cout << " Age:\t"  << age;
     cout << " DaysInCourse: {";
-    
 
-    
     for (auto curr = numberOfDaysToComplete; curr < numberOfDaysToComplete + daysInCourseArraySize; curr++) {
         cout << *curr << ",";
     }

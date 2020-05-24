@@ -80,7 +80,7 @@ void Roster::parse(const string& row){
                 daysInCourse3 = stoul(v[i]);
              break;
           case 8 :
-                degree = DegreeProgram::NETWORK;
+                degree = getDegreeProgram(v[i]);
              break;
            default :
                 cout << "Error: too many items" << endl;
@@ -88,21 +88,12 @@ void Roster::parse(const string& row){
     }
     
     // Seperate logic - return a Student obj; that would be used in the ::add
-    // Student student = Student(studentID, firstName, lastName, emailAddress, age, courseDays, degreeProgram);
-    
     add(studentID, firstName, lastName, email, age, daysInCourse1, daysInCourse2, daysInCourse3, degree);
 }
 
 void Roster::add(const string& studentID, const  string& firstName, const  string& lastName, const  string& emailAddress, size_t age, const size_t daysInCourse1, const size_t daysInCourse2, const size_t daysInCourse3, const DegreeProgram& degreeProgram) {
     
-    //size_t* asdf[2] = { daysInCourse1, daysInCourse2, daysInCourse3 };
-    
-    
     size_t courseDays[] = { daysInCourse1, daysInCourse2, daysInCourse3 };
-    
-    for (auto curr = classRosterArray; curr < classRosterArray + size; ++curr) {
-        cout << "asdf" << curr << endl;
-    }
 
     Student student = Student(studentID, firstName, lastName, emailAddress, age, courseDays, degreeProgram);
     
@@ -124,19 +115,22 @@ void Roster::remove(const string& studentID) {
 }
 
 void Roster::printAll() {
-    for (auto curr = classRosterArray; curr < classRosterArray + size; ++curr) {
+    for (auto curr = classRosterArray; curr < classRosterArray + size; ++curr) 
         curr->print();
-    }
 }
 
 void Roster::printAverageDaysInCourse(const string& studentID) {
-//    int average = 0;
-//
-//    for (int i = 0; i < 5; ++i) {
-//        string tempId = classRosterArray[i]->getId();
-//        cout << "tempId" << tempId << endl;
-//        cout << "studentID" << studentID << endl;
-//    }
+    for (auto curr = classRosterArray; curr < classRosterArray + size; ++curr) {
+
+        if (curr->getId() == studentID)
+        {
+            float avg = (curr->getNumberOfDaysToComplete()[0] +
+                          curr->getNumberOfDaysToComplete()[1] +
+                          curr->getNumberOfDaysToComplete()[2]) / 3;
+            cout << "Student ID: " << studentID << " - average days in course: " << avg << endl;
+        }
+    }
+
 }
 
 void Roster::printInvalidEmails(){
@@ -144,7 +138,7 @@ void Roster::printInvalidEmails(){
 }
 
 void Roster::printByDegreeProgram(const DegreeProgram& degreeProgram){
-    cout << "Printing students with degree type: " << degreeProgramStrings[degreeProgram] << endl;
+    cout << endl << endl;
     
     for (auto curr = classRosterArray; curr < classRosterArray + size; ++curr) {
         if(curr->getDegreeProgram() != degreeProgram)
@@ -152,4 +146,5 @@ void Roster::printByDegreeProgram(const DegreeProgram& degreeProgram){
         
         curr->print();
     }
+    cout << endl << endl;
 }

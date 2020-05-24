@@ -25,7 +25,9 @@ class Student {
     public:
         // Contstructor
         Student();
-        Student(const std::string& id, const std::string& first, const std::string& last, const std::string& email, const u_int8_t years, const std::size_t* numOfDays, const DegreeProgram& degree);
+    void *extracted(const size_t *numOfDays);
+    
+    Student(const std::string& id, const std::string& first, const std::string& last, const std::string& email, const u_int8_t years, const std::size_t* numOfDays, const DegreeProgram& degree);
     
         // Decontstructor
         ~Student();
@@ -45,12 +47,10 @@ class Student {
         void setFirstName(const std::string& firstName);
         void setLastName(const std::string& lastName);
         void setEmailAddress(const std::string& email);
-        void setAge(const int age);
-        void setNumberOfDaysToComplete(const int days[2]);
+        void setAge(const size_t age);
+        void setNumberOfDaysToComplete(const size_t days[2]);
         void setDegreeProgram(const DegreeProgram& degree);
         void print();
-    
-
 };
 
 #endif /* student_h */

@@ -15,4 +15,12 @@ enum DegreeProgram {
 
 static const std::string degreeProgramStrings[] = { "SECURITY", "NETWORK", "SOFTWARE" };
 
+static DegreeProgram getDegreeProgram(std::string degree) {
+    for (int i = 0; i < sizeof(degreeProgramStrings); ++i)
+        if (degree == degreeProgramStrings[i])
+            return static_cast<DegreeProgram>(i);
+    
+    return DegreeProgram::SECURITY;
+}
+
 #endif /* degree_h */
