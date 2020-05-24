@@ -28,6 +28,7 @@ Roster::Roster(size_t size) {
 }
 
 Roster::~Roster() {
+    delete classRosterArrayIsDeleted;
     delete [] classRosterArray;
 }
 
@@ -106,8 +107,9 @@ void Roster::remove(const string& studentID) {
     for (; curr <= lastIdx; ++curr) {
         if (curr->getId() != studentID || classRosterArrayIsDeleted[curr - classRosterArray])
             continue;
-        
+
         classRosterArrayIsDeleted[curr - classRosterArray] = true;
+        //delete classRosterArray;
         break;
     }
     if (curr == lastIdx)
@@ -121,7 +123,6 @@ void Roster::printAll() {
 
 void Roster::printAverageDaysInCourse(const string& studentID) {
     for (auto curr = classRosterArray; curr < classRosterArray + size; ++curr) {
-
         if (curr->getId() == studentID)
         {
             float avg = (curr->getNumberOfDaysToComplete()[0] +
@@ -130,21 +131,24 @@ void Roster::printAverageDaysInCourse(const string& studentID) {
             cout << "Student ID: " << studentID << " - average days in course: " << avg << endl;
         }
     }
-
 }
 
 void Roster::printInvalidEmails(){
-    
+    for (auto curr = classRosterArray; curr < classRosterArray + size; ++curr) {
+        string email = curr->getEmailAddress();
+        if ((email.find("@") == string::npos ||
+             email.find(".") == string::npos) ||
+            (email.find(" ") != string::npos)) {
+            cout << email << endl;
+        }
+    }
 }
 
 void Roster::printByDegreeProgram(const DegreeProgram& degreeProgram){
-    cout << endl << endl;
-    
     for (auto curr = classRosterArray; curr < classRosterArray + size; ++curr) {
         if(curr->getDegreeProgram() != degreeProgram)
             continue;
         
         curr->print();
     }
-    cout << endl << endl;
 }

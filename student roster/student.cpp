@@ -31,6 +31,10 @@ Student::Student(const string& id, const string& first, const string& last, cons
     memcpy(numberOfDaysToComplete, numOfDays, daysInCourseArraySize * sizeof(size_t));
     this->degreeProgram = degreeProgram;
 }
+
+Student::~Student() {
+    //delete [] numberOfDaysToComplete;
+}
 // Get
 string Student::getId() {
     return studentId;
@@ -108,5 +112,3 @@ void Student::print() {
     cout << " Degree Program: " << degreeProgramStrings[degreeProgram] << endl;
     cout << endl;
 }
-
-Student::~Student() {}
