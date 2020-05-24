@@ -109,7 +109,7 @@ void Roster::remove(const string& studentID) {
             continue;
 
         classRosterArrayIsDeleted[curr - classRosterArray] = true;
-        //delete classRosterArray;
+        delete [] classRosterArray;
         break;
     }
     if (curr == lastIdx)

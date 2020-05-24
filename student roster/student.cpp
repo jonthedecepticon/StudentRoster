@@ -33,7 +33,7 @@ Student::Student(const string& id, const string& first, const string& last, cons
 }
 
 Student::~Student() {
-    //delete [] numberOfDaysToComplete;
+    //delete numberOfDaysToComplete;
 }
 // Get
 string Student::getId() {
