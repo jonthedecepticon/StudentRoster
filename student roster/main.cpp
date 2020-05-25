@@ -35,40 +35,42 @@ int main() {
     for (int i = 0; i < sizeof(studentData)/sizeof(studentData[0]); ++i) {
         classRoster->parse(studentData[i]);
     }
-    cout << "----------------------------------------------------------" << endl;
-    cout << "PRINT ALL: " << endl;
-    cout << "----------------------------------------------------------" << endl;
+//    cout << "----------------------------------------------------------" << endl;
+//    cout << "PRINT ALL: " << endl;
+//    cout << "----------------------------------------------------------" << endl;
     classRoster->printAll();
     
-    cout << "----------------------------------------------------------" << endl;
-    cout << "INVALID EMAILS: " << endl;
-    cout << "----------------------------------------------------------" << endl;
+//    cout << "----------------------------------------------------------" << endl;
+//    cout << "INVALID EMAILS: " << endl;
+//    cout << "----------------------------------------------------------" << endl;
     classRoster->printInvalidEmails();
     cout << endl;
      
     int cheapTrick = 1;
-    cout << "----------------------------------------------------------" << endl;
-    cout << "AVERAGE DAYS IN COURSE: " << endl;
-    cout << "----------------------------------------------------------" << endl;
+//    cout << "----------------------------------------------------------" << endl;
+//    cout << "AVERAGE DAYS IN COURSE: " << endl;
+//    cout << "----------------------------------------------------------" << endl;
     for (int i = 0; i < sizeof(studentData)/sizeof(studentData[0]); ++i) {
         classRoster->printAverageDaysInCourse("A" + std::to_string(cheapTrick));
         cheapTrick++;
     }
     cout << endl;
     
-    cout << "----------------------------------------------------------" << endl;
-    cout << "STUDENTS BY DEGREE PROGRAM: " << endl;
-    cout << "----------------------------------------------------------" << endl;
+//    cout << "----------------------------------------------------------" << endl;
+//    cout << "STUDENTS BY DEGREE PROGRAM: " << endl;
+//    cout << "----------------------------------------------------------" << endl;
     classRoster->printByDegreeProgram(SOFTWARE);
     
     classRoster->remove("A3");
     
-    cout << "----------------------------------------------------------" << endl;
-    cout << "PRINT ALL: " << endl;
-    cout << "----------------------------------------------------------" << endl;
+//    cout << "----------------------------------------------------------" << endl;
+//    cout << "PRINT ALL: " << endl;
+//    cout << "----------------------------------------------------------" << endl;
     classRoster->printAll();
 
     
     classRoster->remove("A3");
     //expected: the above line should print a message saying such a student with this ID was not found.
+    
+    cout << endl << endl;
 }

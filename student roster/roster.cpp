@@ -102,18 +102,22 @@ void Roster::add(const string& studentID, const  string& firstName, const  strin
 }
 
 void Roster::remove(const string& studentID) {
-    auto curr = classRosterArray;
     auto lastIdx = classRosterArray + size;
-    for (; curr <= lastIdx; ++curr) {
-        if (curr->getId() != studentID || classRosterArrayIsDeleted[curr - classRosterArray])
+    for (int ptrOffset = 0; classRosterArray + ptrOffset <= lastIdx; ++ptrOffset) {
+        bool isDeleted = classRosterArrayIsDeleted[ptrOffset];
+        if (isDeleted) {
+            cout << "Error: Student Id not found";
+            return;
+        }
+        
+        Student* curr = classRosterArray + ptrOffset;
+        if (curr->getId() != studentID)
             continue;
 
-        classRosterArrayIsDeleted[curr - classRosterArray] = true;
-        delete [] classRosterArray;
-        break;
+        classRosterArrayIsDeleted[ptrOffset] = true;
+        memset(classRosterArray + ptrOffset, sizeof(Student), 0);
+            break;
     }
-    if (curr == lastIdx)
-        cout << "Error: Student Id not found";
 }
 
 void Roster::printAll() {
